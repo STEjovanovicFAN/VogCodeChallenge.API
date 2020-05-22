@@ -3,43 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using VogCodeChallenge.API.DatabaseEntities;
 
 namespace VogCodeChallenge.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    //[Route("api/[controller]")]
+    //[ApiController]
     public class ValuesController : ControllerBase
     {
-        // GET api/values
+        private CreateEntities ce = new CreateEntities();
+
+        // GET api/employees
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [Route("api/employees")]
+        public IEnumerable<Employee> GetEmployees()
         {
-            return new string[] { "value1", "value2" };
+            return ce.GetAll();
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        // GET api/employees/department/{departmentID}
+        [HttpGet("{departmentID}")]
+        [Route("api/employees/department/{departmentID}")]
+        public IEnumerable<Employee> Get(int departmentID)
         {
-            return "value";
-        }
+            List<Employee> DeptEmp = new List<Employee>();
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+            foreach(var emp in ce.GetAll())
+            {
+                if (emp.DepartmentID == departmentID)
+                    DeptEmp.Add(emp);
+            }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return DeptEmp;
         }
     }
 }
