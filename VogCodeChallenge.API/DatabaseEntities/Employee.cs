@@ -15,6 +15,6 @@ namespace VogCodeChallenge.API.DatabaseEntities
 
         public string EmployeeAddress { get; set; }
 
-        public string DepartmentID { get; set; }
+        public int DepartmentID { get; set; }
     }
 }

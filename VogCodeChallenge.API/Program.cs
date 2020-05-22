@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using VogCodeChallenge.API.Tests;
 
 namespace VogCodeChallenge.API
 {
@@ -14,6 +15,9 @@ namespace VogCodeChallenge.API
     {
         public static void Main(string[] args)
         {
+            //sanity test for creation of new entities and such
+            TestPlaygroundClass t = new TestPlaygroundClass();
+
             CreateWebHostBuilder(args).Build().Run();
         }
 
